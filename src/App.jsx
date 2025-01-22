@@ -1,16 +1,51 @@
+import './index.css';
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {createBrowserRouter, RouterProvider} from "react-router";
+import Layout from "./assets/Layout.jsx";
+import Home from "./assets/Home.jsx";
+import Beats from "./assets/Beats.jsx";
+import BeatCreateForm from "./assets/BeatCreateForm.jsx";
+import BeatDetail from "./assets/BeatDetail.jsx";
+import BeatDelete from "./assets/BeatDelete.jsx";
 
+
+
+const routerOne =createBrowserRouter([
+    {
+        element:<Layout/>,
+        children: [
+            {
+                path: '/',
+                element: <Home/>
+            },
+            {
+                path:'/beats',
+                element: <Beats/>
+            },
+            {
+                path:'/beats/create',
+                element:<BeatCreateForm/>
+            },
+            {
+                path:'/beats/:id',
+                element:<BeatDetail/>
+            },
+            {
+                path:'/beats/:id/delete',
+                element:<BeatDelete/>
+            },
+
+        ]
+
+    }
+])
 
 function App() {
   const [count, setCount] = useState(0)
 
-  return (
-    <>
-        <h1>Hello World</h1>
-    </>
-  )
+    return (
+        <RouterProvider router={routerOne}/>
+    )
 }
 
 export default App
