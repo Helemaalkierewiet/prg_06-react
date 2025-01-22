@@ -7,6 +7,7 @@ import Beats from "./assets/Beats.jsx";
 import BeatCreateForm from "./assets/BeatCreateForm.jsx";
 import BeatDetail from "./assets/BeatDetail.jsx";
 import BeatDelete from "./assets/BeatDelete.jsx";
+import BeatEdit from "./assets/BeatEdit.jsx";
 
 
 
@@ -33,6 +34,10 @@ const routerOne =createBrowserRouter([
             {
                 path:'/beats/:id/delete',
                 element:<BeatDelete/>
+            },
+            {
+                path:'/beats/:id/edit',
+                element:<BeatEdit/>
             },
 
         ]
