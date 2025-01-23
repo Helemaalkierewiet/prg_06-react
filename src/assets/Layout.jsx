@@ -7,7 +7,7 @@ function Layout() {
 
     return(
         <div
-            className="h-screen bg-black flex justify-center " // Use h-screen to set full height
+            className="h-screen  bg-black flex justify-center backdrop-blur-2xl" // Use h-screen to set full height
             style={{
                 backgroundImage: "url('https://64.media.tumblr.com/94d635e42c8da6d07c5c1257cac71a36/tumblr_ozu04bxEkd1wxdq3zo1_500.gifv')",
                 backgroundSize: 'cover', // Ensure the background image covers the container

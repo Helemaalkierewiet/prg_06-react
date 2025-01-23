@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 
 
 
@@ -8,6 +8,7 @@ function BeatEdit() {
     const id = params.id;
     console.log(id);
     const [beat, setBeat] = useState();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -77,85 +78,90 @@ function BeatEdit() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Formulier verzonden:', formData ,fetchNewBeats());
+        navigate('/beats');
     };
 
     return(
         <>
-            <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
-                <h2 className="text-2xl font-semibold text-center mb-6">Edit Beat</h2>
+            <article className=" flex items-center">
 
-                <form onSubmit={handleSubmit}>
-                    {/* Title Field */}
-                    <div className="mb-4">
-                        <label htmlFor="title" className="block text-sm font-medium text-black">Title</label>
-                        {beat ? (
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            value={formData.title}
-                            placeholder={beat.title}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        ) : (
-                        <h2>loading</h2>
-                        )}
-                    </div>
 
-                    {/* Description Field */}
-                    <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-                        {beat ? (
-                        <input
-                            id="description"
-                            name="description"
-                            value={formData.description}
-                            placeholder={beat.description}
-                            onChange={handleInputChange}
-                            required
+                <div className="max-w-1/2 min-w-72 h-96 my-10 p-4 bg-blue-800 bg-opacity-70 rounded-lg shadow-md">
+                    <h2 className="text-2xl font-semibold text-center mb-0">Edit Beat</h2>
 
-                            className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        ) : (
-                        <h2>loading</h2>
-                        )}
-                    </div>
-
-                    {/* Genre Field */}
-                    <div className="mb-6">
-                        <label htmlFor="genre" className="block text-sm font-medium text-gray-700">Genre</label>
-                        {beat ? (
-                        <input
-                            type="text"
-                            id="genre"
-                            name="genre"
-                            value={formData.genre}
-                            placeholder={beat.genre}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                        ) : (
+                    <form onSubmit={handleSubmit}>
+                        {/* Title Field */}
+                        <div className="mb-2">
+                            <label htmlFor="title" className="block text-xl font-medium text-white">Title</label>
+                            {beat ? (
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                value={formData.title}
+                                placeholder={beat.title}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            ) : (
                             <h2>loading</h2>
-                        )}
-                    </div>
+                            )}
+                        </div>
 
-                    {/* Submit Button */}
-                    <div className="flex justify-center">
-                        <button
-                            type="submit"
+                        {/* Description Field */}
+                        <div className="mb-2">
+                            <label htmlFor="description" className="block text-xl font-medium text-white">Description</label>
+                            {beat ? (
+                            <input
+                                id="description"
+                                name="description"
+                                value={formData.description}
+                                placeholder={beat.description}
+                                onChange={handleInputChange}
+                                required
 
-                            className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 focus:outline-none"
-                        >
+                                className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            ) : (
+                            <h2>loading</h2>
+                            )}
+                        </div>
 
-                        </button>
-                    </div>
-                </form>
+                        {/* Genre Field */}
+                        <div className="mb-2">
+                            <label htmlFor="genre" className="block text-xl font-medium text-white">Genre</label>
+                            {beat ? (
+                            <input
+                                type="text"
+                                id="genre"
+                                name="genre"
+                                value={formData.genre}
+                                placeholder={beat.genre}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                            ) : (
+                                <h2>loading</h2>
+                            )}
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="flex justify-center">
+                            <button
+                                type="submit"
+
+                                className="w-full py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition duration-200 focus:outline-none"
+                            >
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
 
 
-            </div>
+                </div>
+            </article>
         </>
     )
 

@@ -1,12 +1,15 @@
 import {useState} from "react";
+import {useNavigate} from "react-router";
 
 
 function BeatCreateForm() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         genre: '',
     });
+
 
     async function fetchBeats() {
         try {
@@ -22,8 +25,12 @@ function BeatCreateForm() {
                         genre: formData.genre
                     })
 
-            });
 
+            });
+            console.log('yooo dit is je debug JUNO', response);
+            const createdBeat = await response.json(); // Parse the response as JSON
+            console.log('Created Beat:', createdBeat);
+            navigate(`/beats/${createdBeat.id}`);
 
         } catch (error) {
             console.error('(create form log error:)', error);
@@ -41,6 +48,7 @@ function BeatCreateForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Formulier verzonden:', formData ,fetchBeats());
+
     };
 
     return(
