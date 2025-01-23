@@ -1,14 +1,20 @@
 import {Link, Outlet} from "react-router";
 import Beat from "./Beat.jsx";
 import {useEffect, useState} from "react";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 function Beats() {
 
     const [beats, setBeats] = useState([]);
 
-    useEffect(() => {
-        async function fetchBeats() {
+    const [pagination, setPagination] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState("");
+    const limit = 12;
+
+
+        async function fetchBeats(page = 1, limit = 12) {
             try {
-                const response = await fetch('http://145.24.223.55:8002/tracks', {
+                const response = await fetch(`http://145.24.223.55:8002/tracks?page=${page}&limit=${limit}`, {
                         headers: {
                             'Accept': 'application/json'
                         }
@@ -20,7 +26,7 @@ function Beats() {
                 // console.log(data);
                 console.log('het doet het wel');
                 setBeats(data.items);
-
+                setPagination(data.pagination || {});
 
 
             } catch (error) {
@@ -29,12 +35,22 @@ function Beats() {
         }
 
 
-        fetchBeats();
 
 
-    }, []);
+
+
 
     console.log(beats)
+
+    useEffect(() => {
+         fetchBeats(currentPage, limit);
+    }, [currentPage]);
+
+    const handlePageChange = (page) => {
+        if (page >= 1 && page <= (pagination.totalPages || 1)) {
+            setCurrentPage(page);
+        }
+    };
 
 
     return (
@@ -48,14 +64,45 @@ function Beats() {
 
 
                 {beats ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-auto">
+
+                    <TransitionGroup className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-auto">
                         {beats.map((beat) => (
-                            <Beat key={beat.id} beat={beat}></Beat>
+                            <CSSTransition key={beat.id} timeout={500} classNames="beat">
+                                <Beat key={beat.id} beat={beat}></Beat>
+                            </CSSTransition>
                         ))}
-                    </div>
+                    </TransitionGroup>
                 ) : (
                     <div>Beats are loading...</div>
                 )}
+
+
+
+                {/* Pagination Buttons */}
+                <div className="flex justify-center mt-6 space-x-4">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`px-4 py-2 rounded-md text-white ${
+                            currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+                        }`}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === pagination.totalPages}
+                        className={`px-4 py-2 rounded-md text-white ${
+                            currentPage === pagination.totalPages
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-blue-500 hover:bg-blue-600"
+                        }`}
+                    >
+                        Next
+                    </button>
+                </div>
+
+
             </div>
         </>
     );

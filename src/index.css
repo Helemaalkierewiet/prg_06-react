@@ -83,3 +83,23 @@ h1, h2, h3 {
     transform: scale(1.9);
     transition: opacity 200ms, transform 300ms;
 }
+
+
+.beat-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+.beat-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms, transform 500ms;
+}
+.beat-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.beat-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 500ms, transform 500ms;
+}

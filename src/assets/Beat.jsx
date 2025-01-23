@@ -2,7 +2,7 @@ import {Link} from "react-router";
 
 function Beat({beat}){
     return (
-        <article className="bg-opacity-90 bg-blue-700 p-2">
+        <article className="bg-opacity-90 bg-blue-700 p-2 w-60 h-20">
 
             <Link className="text-pink-400 text-2xl" to={`/beats/${beat.id}`}><h1 className="text-white">{beat.title}</h1></Link>
             <Link className="text-pink-400 text-lg" to={`/spots/${beat.id}`}>{beat.genre}</Link>
