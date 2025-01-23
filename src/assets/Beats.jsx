@@ -39,12 +39,16 @@ function Beats() {
 
     return (
         <>
-            <div className="flex flex-col space-y-6">
+            <div className="flex flex-col h-screen overflow-y-hidden ">
+                <div>
+                    <h1 className="text-white text-6xl mt-10 mb-10 text-center">List of beats</h1>
+                    {/*<h1   className="text-pink-400 text-6xl mb-4 text-center ">List of beats</h1>*/}
 
-                <h1 className="text-white text-5xl mb-4 ">List of beats</h1>
+                </div>
+
 
                 {beats ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-auto">
                         {beats.map((beat) => (
                             <Beat key={beat.id} beat={beat}></Beat>
                         ))}

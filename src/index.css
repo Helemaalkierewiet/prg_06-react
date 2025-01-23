@@ -39,7 +39,7 @@ h1, h2, h3 {
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0; /* Initially, the background is invisible */
-    transition: opacity 1.05s ease-in-out; /* Transition for opacity */
+    transition: opacity 0.55s ease-in-out; /* Transition for opacity */
     z-index: -1; /* Ensure the pseudo-element is behind the text */
     width: 100%; /* Adjust width if needed */
     height: 100%; /* Adjust height if needed */
@@ -51,4 +51,35 @@ h1, h2, h3 {
 
 .button-with-bg:hover::before {
     opacity: 1; /* Fade in the background image on hover */
+}
+
+
+
+
+.page {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 100ms, transform 500ms;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: scale(1.9);
+    transition: opacity 200ms, transform 300ms;
 }
