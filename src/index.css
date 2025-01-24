@@ -87,23 +87,23 @@ h1, h2, h3 {
 
 .beat-enter {
     opacity: 0;
-    transform: scale(0.8); /* Start smaller */
+    transform: scale(0.5); /* Start smaller */
 }
 
 .beat-enter-active {
     opacity: 1;
     transform: scale(1); /* Zoom in to normal size */
-    transition: opacity 300ms ease, transform 500ms ease; /* Shorter opacity transition for quicker fade-in */
+    transition: opacity 400ms ease, transform 800ms ease; /* Shorter opacity transition for quicker fade-in */
 }
 
 .beat-exit {
     opacity: 1;
-    transform: scale(1); /* Stay at normal size initially */
+    transform: scale(0.1); /* Stay at normal size initially */
 }
 
 .beat-exit-active {
     opacity: 0;
-    transform: scale(0.8); /* Zoom out */
+    transform: scale(0.1); /* Zoom out */
     /*transition: opacity 300ms ease, transform 100ms ease; !* Shorter opacity transition for quicker fade-out *!*/
 }
 
