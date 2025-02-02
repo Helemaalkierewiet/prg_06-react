@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router";
+import {Link, useNavigate, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import beat from "./Beat.jsx";
 
@@ -6,6 +6,8 @@ function BeatDetail() {
     let params = useParams()
     console.log(params, ' params logger');
     const [beat, setBeat] =useState(null);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchBeats() {
@@ -16,6 +18,13 @@ function BeatDetail() {
                         }
                     }
                 );
+
+
+                // check for if the response is not ok and catch to beat not exist page
+                if (!response.ok) {
+                    navigate('/notfound');
+                }
+                console.log(setError, 'error logger');
                 console.log('const data await response beneath this line');
                 const data = await response.json();
 
@@ -26,6 +35,7 @@ function BeatDetail() {
 
             } catch (error) {
                 console.error('Fout bij het ophalen van het product:', error);
+                navigate('/notfound');
             }
         }
 
@@ -34,6 +44,9 @@ function BeatDetail() {
 
 
     }, []);
+
+    if (error) return <h2 className="text-5xl text-red-500">THIS BEAT DOES NOT EXIST</h2>;
+    if (!beat) return <h2 className="text-5xl text-white">Loading...</h2>;
 
     return (
         <>
@@ -91,3 +104,5 @@ function BeatDetail() {
 
 
 export default BeatDetail;
+
+
