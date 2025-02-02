@@ -10,6 +10,8 @@ function BeatEdit() {
     const [beat, setBeat] = useState();
     const navigate = useNavigate();
 
+    const token = localStorage.getItem("token"); // Get the stored JWT
+
 
     useEffect(() => {
         async function fetchBeats() {
@@ -50,7 +52,8 @@ function BeatEdit() {
             const response = await fetch(`http://145.24.223.55:8002/tracks/` + id, {
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 method: 'PUT',
                 body: JSON.stringify({
